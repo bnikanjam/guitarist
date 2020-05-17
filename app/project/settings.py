@@ -4,8 +4,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = 'qe!y2f242=)xsf3pn_hj*^j%dk*ri)^u4i_hk=)qb^-wjs_0+a'
-DEBUG = True
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = int(os.getenv("DEBUG", default=0))
 
 ALLOWED_HOSTS = []
 

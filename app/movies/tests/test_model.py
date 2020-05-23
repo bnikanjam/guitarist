@@ -1,6 +1,6 @@
 import pytest
 
-from .models import Movie
+from movies.models import Movie
 
 
 @pytest.mark.django_db  # explicitly request database access

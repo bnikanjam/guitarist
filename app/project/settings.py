@@ -93,7 +93,10 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-STATIC_URL = '/static/'
+# In Dev. any request to http://localhost:8000/staticfiles/* will
+# be served from the "staticfiles" directory.
+STATIC_URL = "/staticfiles/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 
 if not DEBUG:

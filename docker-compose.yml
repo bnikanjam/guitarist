@@ -4,7 +4,9 @@ services:
 
   web:
     build: ./app
-    command: gunicorn hello_django.wsgi:application --bind 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app/:/usr/src/app/
     ports:
       - 8000:8000
     env_file:
@@ -15,11 +17,11 @@ services:
   postgres-db:
     image: library/postgres:12.3-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data_dev:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=username
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=postgres_db_dev
 
 volumes:
-  postgres_data:
+  postgres_data_dev:

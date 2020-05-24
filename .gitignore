@@ -96,3 +96,5 @@ ENV/
 local_ali.py
 .DS_Store
 scratch/
+
+staticfiles

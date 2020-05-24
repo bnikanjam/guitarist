@@ -1,0 +1,20 @@
+
+
+Add Handling media files
+- add a django-app, upload, to handle uploading images
+- For prod:
+    - add another volume to the web and nginx services
+    - Create a directory for media files in  Dockerfile.prod
+    - Update the Nginx config
+
+
+Add Nginx to serve up staticfiles
+- Update settings.py for STATIC_URL and STATIC_ROOT
+- For dev, Collect the static files in entrypoint.sh
+- For prod, add a shared volume to the web and nginx services in docker-compose.prod.yml
+- Create the staticfiles dir in Docker so later avoid permission denied when acting as a non-root user
+- Update the Nginx configuration to route static file requests to the "staticfiles" dir
+
+
+Add Nginx as a reverse proxy for Gunicorn to handle clients requests
+

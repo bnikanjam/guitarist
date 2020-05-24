@@ -22,6 +22,7 @@ INSTALLED_APPS = [
 
     # Project Django Supportive Apps
     'users',
+    'upload',
 
     # Project Django Main Apps
     'movies',
@@ -93,10 +94,13 @@ USE_TZ = True
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-# In Dev. any request to http://localhost:8000/staticfiles/* will
-# be served from the "staticfiles" directory.
+
 STATIC_URL = "/staticfiles/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+
+MEDIA_URL = "/mediafiles/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 
 if not DEBUG:

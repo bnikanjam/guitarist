@@ -16,6 +16,7 @@ services:
 #      - 8000:8000
     volumes:
     - static_volume:/home/app/web/staticfiles
+    - media_volume:/home/app/web/mediafiles
     # port 8000 is only exposed internally, to other Docker services.
     # The port will not be published to the host machine.
     expose:
@@ -36,6 +37,7 @@ services:
     build: ./nginx
     volumes:
       - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
     ports:
       - 1337:80
     depends_on:
@@ -46,3 +48,4 @@ volumes:
   # Volume for the web and nginx services
   # so that each container will share a directory named "staticfiles"
   static_volume:
+  media_volume:

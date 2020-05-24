@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+
+  # The web service uses an image that’s built from the Dockerfile
+  # in the ./app directory.
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.prod
+    command: gunicorn project.wsgi:application --bind 0.0.0.0:8000
+#    command: python manage.py runserver 0.0.0.0:8000
+#    volumes:
+#      - ./app/:/usr/src/app/
+#    ports:
+#      - 8000:8000
+    volumes:
+    - static_volume:/home/app/web/staticfiles
+    - media_volume:/home/app/web/mediafiles
+    # port 8000 is only exposed internally, to other Docker services.
+    # The port will not be published to the host machine.
+    expose:
+      - 8000
+    env_file:
+      - ./app/.env.prod
+    depends_on:
+      - postgres-db
+
+  postgres-db:
+    image: library/postgres:12.3-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./app/.env.prod.db
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  # Volume for the web and nginx services
+  # so that each container will share a directory named "staticfiles"
+  static_volume:
+  media_volume:

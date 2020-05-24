@@ -96,9 +96,6 @@ ENV/
 local_ali.py
 .DS_Store
 scratch/
-# Pipenv Files
-Pipfile
-Pipfile.lock
-# Docker files
-Dockerfile
-docker-compose.yml
+
+staticfiles
+mediafiles
